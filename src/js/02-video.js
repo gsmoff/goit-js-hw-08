@@ -10,14 +10,15 @@ const saveData = localStorage.getItem(STORAGE_KEY);
 
 const onPlay = function (data) {
     localStorage.setItem(STORAGE_KEY, data.seconds);
-    console.log('viewing time: ' + data.seconds);
+    console.log('viewing time:' +data.seconds);
 };
 
 player.on('timeupdate', throttle(onPlay, 1000));
 
 function playAgain() {
     if (saveData !== null) {
-        player.setCurrentTime(saveData)
-    }
+        const parsedData = JSON.parse(saveData);
+        player.setCurrentTime(parsedData)
+    };
 };
 playAgain();
